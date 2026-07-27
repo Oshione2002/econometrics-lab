@@ -1,0 +1,93 @@
+.button { border: 1px solid transparent; border-radius: 10px; padding: 10px 15px; font-weight: 750; transition: transform .15s, background .15s, border-color .15s; }
+.button:hover:not(:disabled) { transform: translateY(-1px); }
+.button:disabled { opacity: .45; cursor: not-allowed; }
+.button.primary { color: #06101d; background: linear-gradient(135deg, var(--accent), #9af0d9); }
+.button.secondary { background: var(--surface-2); color: var(--text); border-color: var(--border); }
+.button.ghost { background: transparent; color: var(--text); border-color: var(--border); }
+.button.large { padding: 13px 22px; }
+.button.full { width: 100%; }
+.file-button { display: inline-flex; align-items: center; }
+.text-button { border: 0; padding: 0; color: var(--accent-2); background: transparent; font-weight: 750; text-align: left; }
+
+.workflow-grid { display: grid; grid-template-columns: minmax(290px, .72fr) minmax(0, 1.28fr); gap: 18px; }
+.panel { padding: 22px; margin-bottom: 18px; }
+.panel-header { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; margin-bottom: 20px; }
+.panel-header > div:first-child { display: flex; gap: 12px; align-items: center; }
+.panel-header h2 { margin: 0; font-size: 18px; }
+.panel-header p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+.step-number { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; color: var(--accent); background: rgba(110,231,195,.09); font-weight: 800; }
+.pill.executable { color: var(--success); background: rgba(110,231,195,.08); }
+.dropzone { min-height: 210px; border: 1px dashed rgba(143,167,189,.35); border-radius: 14px; display: grid; place-content: center; text-align: center; padding: 24px; background: var(--surface-2); transition: .2s; }
+.dropzone:hover, .dropzone.drag { border-color: var(--accent); background: rgba(110,231,195,.05); }
+.dropzone p, .dropzone small { color: var(--muted); margin: 5px 0; }
+.drop-icon { font-size: 34px; color: var(--accent); }
+.summary-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px; }
+.summary-cards div { background: var(--surface-2); padding: 13px; border-radius: 10px; }
+.summary-cards span, .summary-cards strong { display: block; }
+.summary-cards span { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+.summary-cards strong { margin-top: 5px; font-size: 20px; }
+.method-select-card { display: flex; gap: 13px; align-items: center; padding: 14px; border: 1px solid var(--border); border-radius: 13px; background: var(--surface-2); margin-bottom: 18px; }
+.method-icon { width: 46px; height: 46px; border-radius: 13px; background: linear-gradient(135deg, rgba(110,231,195,.18), rgba(86,185,255,.12)); display: grid; place-items: center; color: var(--accent); font: 800 20px Georgia, serif; }
+.method-select-card span, .method-select-card strong, .method-select-card small { display: block; }
+.method-select-card span, .method-select-card small { color: var(--muted); font-size: 11px; }
+.method-select-card strong { margin: 3px 0; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+.field { display: grid; gap: 7px; }
+.field > span, fieldset legend { color: var(--muted); font-size: 11px; font-weight: 750; text-transform: uppercase; letter-spacing: .06em; }
+select, input[type="text"], .search-box input { width: 100%; padding: 11px 12px; border-radius: 10px; border: 1px solid var(--border); color: var(--text); background: var(--surface-2); outline: none; }
+select:focus, input:focus, textarea:focus { border-color: var(--accent-2); box-shadow: 0 0 0 3px rgba(86,185,255,.08); }
+.predictor-field { border: 0; padding: 0; margin: 0; grid-row: span 3; }
+.checkbox-list { border: 1px solid var(--border); border-radius: 10px; padding: 7px; min-height: 178px; max-height: 220px; overflow: auto; background: var(--surface-2); }
+.checkbox-option { display: flex; align-items: center; gap: 9px; padding: 8px; border-radius: 8px; font-size: 13px; }
+.checkbox-option:hover { background: var(--surface-3); }
+.checkbox-option input { accent-color: var(--accent); }
+.empty-field { display: block; color: var(--muted); padding: 10px; }
+.toggle-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--border); }
+.toggle-row strong, .toggle-row span { display: block; }
+.toggle-row strong { font-size: 13px; }
+.toggle-row span { color: var(--muted); font-size: 11px; margin-top: 3px; }
+.toggle-row input { width: 38px; height: 20px; accent-color: var(--accent); }
+.compact-field { align-self: end; }
+.run-row { display: flex; align-items: center; gap: 14px; margin-top: 20px; }
+.run-row span { color: var(--muted); font-size: 11px; }
+.results-panel { margin-top: 18px; }
+.results-empty { min-height: 260px; display: grid; place-content: center; text-align: center; color: var(--muted); }
+.results-empty h3 { color: var(--text); margin: 12px 0 4px; }
+.results-empty p { max-width: 530px; }
+.empty-visual { width: 66px; height: 66px; border-radius: 20px; display: grid; place-items: center; margin: auto; background: var(--surface-2); color: var(--accent); font-size: 30px; }
+.result-actions { display: flex; gap: 8px; }
+.model-metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 18px; }
+.metric-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 13px; }
+.metric-card span, .metric-card strong { display: block; }
+.metric-card span { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .07em; }
+.metric-card strong { font-size: 20px; margin-top: 5px; }
+.result-tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--border); margin-bottom: 16px; overflow-x: auto; }
+.result-tab { border: 0; background: transparent; color: var(--muted); padding: 10px 12px; border-bottom: 2px solid transparent; font-weight: 700; }
+.result-tab.active { color: var(--text); border-color: var(--accent); }
+.result-tab-panel { display: none; }
+.result-tab-panel.active { display: block; }
+.table-wrap { overflow: auto; border: 1px solid var(--border); border-radius: 12px; }
+table { width: 100%; border-collapse: collapse; min-width: 680px; }
+th, td { padding: 12px 13px; text-align: left; border-bottom: 1px solid var(--border); font-size: 12px; }
+th { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .07em; background: var(--surface-2); position: sticky; top: 0; }
+tbody tr:last-child td { border-bottom: 0; }
+.p-significant { color: var(--success); font-weight: 800; }
+.diagnostic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; }
+.diagnostic-card { padding: 15px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-2); }
+.diagnostic-card .diag-top { display: flex; justify-content: space-between; gap: 8px; }
+.diagnostic-card h3 { margin: 0; font-size: 13px; }
+.diagnostic-card p { color: var(--muted); font-size: 11px; line-height: 1.45; margin: 8px 0 0; }
+.diag-value { font-family: monospace; color: var(--accent); }
+.diag-status { display: inline-block; margin-top: 10px; padding: 5px 8px; border-radius: 999px; font-size: 10px; font-weight: 800; }
+.diag-status.pass { color: var(--success); background: rgba(110,231,195,.08); }
+.diag-status.warn { color: var(--warning); background: rgba(244,198,106,.08); }
+.vif-section { margin-top: 18px; }
+.vif-section h3 { font-size: 14px; }
+.vif-row { display: grid; grid-template-columns: 160px 1fr 60px; gap: 10px; align-items: center; margin: 9px 0; font-size: 12px; }
+.vif-track { height: 7px; background: var(--surface-3); border-radius: 999px; overflow: hidden; }
+.vif-fill { height: 100%; background: var(--accent-2); border-radius: inherit; }
+.plot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+.plot-card { border: 1px solid var(--border); border-radius: 12px; padding: 13px; background: var(--surface-2); }
+.plot-card h3 { margin: 0 0 8px; font-size: 13px; }
+.plot-card svg { width: 100%; height: auto; overflow: visible; }
+.code-block { margin: 0; padding: 18px; color: #cce6ff; background: #04101a; border: 1px solid var(--border); border-radius: 12px; overflow: auto; font-size: 12px; line-height: 1.65; white-space: pre; }
