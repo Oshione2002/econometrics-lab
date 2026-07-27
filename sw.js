@@ -1,5 +1,5 @@
 const CACHE = 'econometrics-lab-v0.1.0';
-const SHELL = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest', './assets/icon.svg', './data/sample-data.csv'];
+const SHELL = ['./', './index.html', './styles-core.css', './styles-workspace.css', './styles-pages.css', './app-state.js', './app-data.js', './app-engine.js', './app-results.js', './app-project.js', './manifest.webmanifest', './assets/icon.svg', './data/sample-data.csv'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting()));
