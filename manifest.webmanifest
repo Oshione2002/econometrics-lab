@@ -1,0 +1,12 @@
+{
+  "name": "Econometrics Lab",
+  "short_name": "EconoLab",
+  "description": "A free visual R econometrics environment that runs in your browser.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#06101d",
+  "theme_color": "#07111f",
+  "icons": [
+    { "src": "./assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
