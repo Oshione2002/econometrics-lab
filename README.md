@@ -41,11 +41,3 @@ GitHub Pages can be used as a backup host. webR automatically falls back to its 
 ## Current boundary
 
 Only methods marked **Executable** have been validated in this MVP. The remaining methods are indexed and require additional visual adapters and webR package compatibility testing.
-
-## Interface preview
-
-![Econometrics Lab workspace](screenshots/home.png)
-
-![Method library](screenshots/methods.png)
-
-![Mobile layout](screenshots/mobile.png)
