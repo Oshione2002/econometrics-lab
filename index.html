@@ -8,7 +8,9 @@
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" href="./assets/icon.svg" />
   <link rel="apple-touch-icon" href="./assets/icon.svg" />
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./styles-core.css" />
+  <link rel="stylesheet" href="./styles-workspace.css" />
+  <link rel="stylesheet" href="./styles-pages.css" />
   <title>Econometrics Lab</title>
 </head>
 <body>
@@ -69,6 +71,7 @@
             <span class="status-dot idle"></span>
             <span>R engine idle</span>
           </div>
+          <button class="button ghost" id="openProjectButton">Open</button>
           <button class="button ghost" id="saveProjectButton">Save</button>
           <button class="button secondary" id="exportProjectButton">Export project</button>
           <button class="icon-button" id="themeButton" aria-label="Toggle theme">◐</button>
@@ -307,6 +310,10 @@ if (exists("data")) {
   <input id="projectImportInput" type="file" accept=".json" hidden />
 
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-  <script type="module" src="./app.js"></script>
+  <script src="./app-state.js"></script>
+  <script src="./app-data.js"></script>
+  <script src="./app-engine.js"></script>
+  <script src="./app-results.js"></script>
+  <script src="./app-project.js"></script>
 </body>
 </html>
