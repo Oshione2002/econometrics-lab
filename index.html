@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07111f" />
+  <meta name="description" content="A free visual R econometrics environment that runs in your browser." />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./assets/icon.svg" />
+  <link rel="apple-touch-icon" href="./assets/icon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>Econometrics Lab</title>
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">β</div>
+        <div>
+          <strong>Econometrics Lab</strong>
+          <span>Visual R workspace</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <button class="nav-item active" data-view="workspace">
+          <span class="nav-icon">⌂</span><span>Workspace</span>
+        </button>
+        <button class="nav-item" data-view="data">
+          <span class="nav-icon">▦</span><span>Data</span>
+        </button>
+        <button class="nav-item" data-view="methods">
+          <span class="nav-icon">ƒ</span><span>Method library</span>
+        </button>
+        <button class="nav-item" data-view="code">
+          <span class="nav-icon">&lt;/&gt;</span><span>R code</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-section">
+        <span class="sidebar-label">METHOD FAMILIES</span>
+        <button class="family-item active" data-family="All">All methods <span>32</span></button>
+        <button class="family-item" data-family="Regression">Regression <span>8</span></button>
+        <button class="family-item" data-family="Diagnostics">Diagnostics <span>5</span></button>
+        <button class="family-item" data-family="Time series">Time series <span>7</span></button>
+        <button class="family-item" data-family="Panel">Panel <span>5</span></button>
+        <button class="family-item" data-family="Causal">Causal <span>4</span></button>
+        <button class="family-item" data-family="Financial">Financial <span>3</span></button>
+      </div>
+
+      <div class="privacy-note">
+        <span class="status-dot"></span>
+        <div>
+          <strong>Local computation</strong>
+          <p>Your dataset stays in this browser.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-column">
+      <header class="topbar">
+        <button id="menuButton" class="icon-button mobile-menu" aria-label="Open navigation">☰</button>
+        <div class="project-title">
+          <span>Current project</span>
+          <strong id="projectName">Untitled econometric analysis</strong>
+        </div>
+        <div class="top-actions">
+          <div class="engine-status" id="engineStatus">
+            <span class="status-dot idle"></span>
+            <span>R engine idle</span>
+          </div>
+          <button class="button ghost" id="saveProjectButton">Save</button>
+          <button class="button secondary" id="exportProjectButton">Export project</button>
+          <button class="icon-button" id="themeButton" aria-label="Toggle theme">◐</button>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="view active" id="workspaceView">
+          <div class="hero-grid">
+            <div class="hero-card">
+              <div class="eyebrow">BROWSER-BASED ECONOMETRICS</div>
+              <h1>From raw data to defensible results.</h1>
+              <p>Upload a dataset, configure a model visually, inspect the exact R code, and run it locally with webR.</p>
+              <div class="hero-actions">
+                <label class="button primary file-button">
+                  <input id="fileInput" type="file" accept=".csv,.xlsx,.xls" hidden />
+                  Upload dataset
+                </label>
+                <button class="button secondary" id="loadSampleButton">Load sample data</button>
+              </div>
+              <div class="hero-meta">
+                <span>✓ No account</span>
+                <span>✓ No paid server</span>
+                <span>✓ Inspectable R code</span>
+              </div>
+            </div>
+
+            <div class="coverage-card">
+              <div class="coverage-header">
+                <div>
+                  <span class="eyebrow">MVP COVERAGE</span>
+                  <h2>Method registry</h2>
+                </div>
+                <span class="coverage-badge">v0.1</span>
+              </div>
+              <div class="coverage-number"><strong>32</strong><span>indexed methods</span></div>
+              <div class="progress-track"><div class="progress-fill" style="width: 28%"></div></div>
+              <div class="coverage-grid">
+                <div><strong>9</strong><span>Executable now</span></div>
+                <div><strong>23</strong><span>Indexed next</span></div>
+              </div>
+              <button class="text-button" data-jump="methods">View coverage ledger →</button>
+            </div>
+          </div>
+
+          <div class="workflow-grid">
+            <section class="panel dataset-panel">
+              <div class="panel-header">
+                <div>
+                  <span class="step-number">1</span>
+                  <div>
+                    <h2>Dataset</h2>
+                    <p>Import CSV or Excel data.</p>
+                  </div>
+                </div>
+                <span class="pill" id="datasetPill">No data</span>
+              </div>
+
+              <div class="dropzone" id="dropzone" tabindex="0">
+                <div class="drop-icon">⇧</div>
+                <strong>Drop your data file here</strong>
+                <p>or choose Upload dataset above</p>
+                <small>CSV and Excel, processed locally</small>
+              </div>
+
+              <div class="dataset-summary hidden" id="datasetSummary">
+                <div class="summary-cards">
+                  <div><span>Rows</span><strong id="rowCount">0</strong></div>
+                  <div><span>Variables</span><strong id="columnCount">0</strong></div>
+                  <div><span>Numeric</span><strong id="numericCount">0</strong></div>
+                  <div><span>Missing</span><strong id="missingCount">0</strong></div>
+                </div>
+                <button class="button ghost full" data-jump="data">Inspect dataset</button>
+              </div>
+            </section>
+
+            <section class="panel model-panel">
+              <div class="panel-header">
+                <div>
+                  <span class="step-number">2</span>
+                  <div>
+                    <h2>Model specification</h2>
+                    <p>Configure an OLS model visually.</p>
+                  </div>
+                </div>
+                <span class="pill executable">Executable</span>
+              </div>
+
+              <div class="method-select-card">
+                <div class="method-icon">β̂</div>
+                <div>
+                  <span>Selected method</span>
+                  <strong>Ordinary Least Squares</strong>
+                  <small>Base R: <code>stats::lm()</code></small>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <label class="field">
+                  <span>Dependent variable</span>
+                  <select id="dependentSelect" disabled>
+                    <option>Upload data first</option>
+                  </select>
+                </label>
+
+                <fieldset class="field predictor-field">
+                  <legend>Independent variables</legend>
+                  <div id="predictorList" class="checkbox-list disabled">
+                    <span class="empty-field">Upload data first</span>
+                  </div>
+                </fieldset>
+
+                <label class="toggle-row">
+                  <div><strong>Include intercept</strong><span>Recommended for most specifications</span></div>
+                  <input id="interceptToggle" type="checkbox" checked />
+                </label>
+
+                <label class="toggle-row">
+                  <div><strong>HC1 robust standard errors</strong><span>Heteroskedasticity-consistent inference</span></div>
+                  <input id="robustToggle" type="checkbox" />
+                </label>
+
+                <label class="field compact-field">
+                  <span>Confidence level</span>
+                  <select id="confidenceSelect">
+                    <option value="0.90">90%</option>
+                    <option value="0.95" selected>95%</option>
+                    <option value="0.99">99%</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="run-row">
+                <button class="button primary large" id="runModelButton" disabled>Run OLS model</button>
+                <span id="runHint">Choose a dependent variable and at least one predictor.</span>
+              </div>
+            </section>
+          </div>
+
+          <section class="panel results-panel" id="resultsPanel">
+            <div class="panel-header">
+              <div>
+                <span class="step-number">3</span>
+                <div>
+                  <h2>Results</h2>
+                  <p>Estimates, diagnostics, plots, and reproducible code.</p>
+                </div>
+              </div>
+              <div class="result-actions hidden" id="resultActions">
+                <button class="button ghost" id="copyCodeButton">Copy R code</button>
+                <button class="button ghost" id="downloadResultsButton">Download results</button>
+              </div>
+            </div>
+
+            <div class="results-empty" id="resultsEmpty">
+              <div class="empty-visual">∑</div>
+              <h3>No model has been estimated</h3>
+              <p>Upload data, choose variables, and run the model. The first R engine load can take several seconds.</p>
+            </div>
+
+            <div class="results-content hidden" id="resultsContent">
+              <div class="model-metrics" id="modelMetrics"></div>
+
+              <div class="result-tabs" role="tablist">
+                <button class="result-tab active" data-result-tab="coefficients">Coefficients</button>
+                <button class="result-tab" data-result-tab="diagnostics">Diagnostics</button>
+                <button class="result-tab" data-result-tab="plots">Plots</button>
+                <button class="result-tab" data-result-tab="rcode">R code</button>
+              </div>
+
+              <div class="result-tab-panel active" id="coefficientsTab">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Term</th><th>Estimate</th><th>Std. error</th><th>t statistic</th><th>p-value</th><th>Confidence interval</th></tr></thead>
+                    <tbody id="coefficientTable"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="result-tab-panel" id="diagnosticsTab">
+                <div class="diagnostic-grid" id="diagnosticGrid"></div>
+                <div class="vif-section">
+                  <h3>Variance inflation factors</h3>
+                  <div id="vifList"></div>
+                </div>
+              </div>
+
+              <div class="result-tab-panel" id="plotsTab">
+                <div class="plot-grid">
+                  <div class="plot-card"><h3>Residuals vs fitted</h3><svg id="residualPlot" viewBox="0 0 600 320" role="img" aria-label="Residuals versus fitted values"></svg></div>
+                  <div class="plot-card"><h3>Residual distribution</h3><svg id="histogramPlot" viewBox="0 0 600 320" role="img" aria-label="Residual histogram"></svg></div>
+                </div>
+              </div>
+
+              <div class="result-tab-panel" id="rcodeTab">
+                <pre class="code-block"><code id="generatedCode"></code></pre>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="dataView">
+          <div class="page-heading"><div><span class="eyebrow">DATA WORKSPACE</span><h1>Inspect your dataset</h1><p>Review types, missing values, and a preview before estimation.</p></div></div>
+          <section class="panel">
+            <div class="panel-header"><div><h2 id="dataFileName">No dataset loaded</h2><p id="dataFileMeta">Upload a CSV or Excel file from the workspace.</p></div><button class="button secondary" data-jump="workspace">Return to model</button></div>
+            <div class="table-wrap data-table-wrap"><table><thead id="dataTableHead"></thead><tbody id="dataTableBody"><tr><td class="empty-cell">No data available.</td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="variablePanel"><div class="panel-header"><div><h2>Variable dictionary</h2><p>Detected types and missing values.</p></div></div><div class="variable-grid" id="variableGrid"><div class="empty-cell">No variables available.</div></div></section>
+        </section>
+
+        <section class="view" id="methodsView">
+          <div class="page-heading"><div><span class="eyebrow">COVERAGE LEDGER</span><h1>Econometric method library</h1><p>Methods remain visible even when browser execution is not yet available.</p></div><div class="search-box"><span>⌕</span><input id="methodSearch" placeholder="Search methods or packages" /></div></div>
+          <div class="legend"><span><i class="legend-dot live"></i>Executable</span><span><i class="legend-dot indexed"></i>Indexed</span></div>
+          <div class="method-library" id="methodLibrary"></div>
+        </section>
+
+        <section class="view" id="codeView">
+          <div class="page-heading"><div><span class="eyebrow">EXPERT MODE</span><h1>R code workspace</h1><p>Run custom R code against the dataset currently loaded into webR.</p></div><button class="button primary" id="runCodeButton">Run code</button></div>
+          <div class="code-workspace">
+            <div class="editor-panel"><div class="editor-title"><span>analysis.R</span><span>R</span></div><textarea id="codeEditor" spellcheck="false"># Load a dataset in the Workspace, then run custom R code here.
+# The imported data frame is named `data`.
+
+if (exists("data")) {
+  summary(data)
+} else {
+  message("Upload a dataset first.")
+}</textarea></div>
+            <div class="console-panel"><div class="editor-title"><span>Console output</span><button class="text-button" id="clearConsoleButton">Clear</button></div><pre id="consoleOutput">R engine has not been started.</pre></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <input id="projectImportInput" type="file" accept=".json" hidden />
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
